@@ -1,40 +1,27 @@
 import express from "express";
-import path from "path";
 import cors from "cors";
-import { fileURLToPath } from "url";
+import path from "path";
 
 const app = express();
 
-/* Fix __dirname for ES module */
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 /* Middlewares */
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: "*" }));
 
-/* ✅ CORS – FINAL FIX */
-app.use(cors({
-  origin: "*",
-}));
-
-/* ✅ Test route (VERY IMPORTANT) */
+/* Test route */
 app.get("/", (req, res) => {
   res.send("Backend is working ✅");
-});
-app.get("/api/foods", (req, res) => {
-  res.json([...]);
 });
 
 /* Static images */
 app.use(
   "/images",
-  express.static(path.join(__dirname, "public/images"))
+  express.static(path.resolve("public/images"))
 );
 
 /* API route */
 app.get("/api/foods", (req, res) => {
-  res.status(200).json([
+  res.json([
     {
       name: "Boiled Egg",
       price: 10,
