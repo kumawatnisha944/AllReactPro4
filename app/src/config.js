@@ -1,5 +1,5 @@
-
 export const BASE_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:9000"
-    : "https://food-backend.onrender.com";
+    : "https://food-backend-4k02.onrender.com";
+
